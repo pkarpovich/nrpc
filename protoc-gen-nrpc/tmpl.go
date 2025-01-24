@@ -21,7 +21,7 @@ import (
 	{{- if Prometheus}}
 	"github.com/prometheus/client_golang/prometheus"
 	{{- end}}
-	"github.com/nats-rpc/nrpc"
+	"github.com/pkarpovich/nrpc"
 )
 
 {{- range .Service}}
@@ -383,7 +383,7 @@ func New{{.GetName}}Client(nc nrpc.NatsConn
 		SvcParam{{.}}: svcParam{{.}},
 		{{- end}}
 		Encoding: "protobuf",
-		Timeout: 5 * time.Second,
+		Timeout: 300 * time.Second,
 	}
 }
 {{- $serviceName := .GetName}}
@@ -659,7 +659,7 @@ func NewClient(nc nrpc.NatsConn
 	c := Client{
 		nc: nc,
 		defaultEncoding: "protobuf",
-		defaultTimeout: 5*time.Second,
+		defaultTimeout: 300*time.Second,
 		{{- if ne 0 (len $pkgSubject)}}
 		pkgSubject: "{{$pkgSubject}}",
 		{{- end}}

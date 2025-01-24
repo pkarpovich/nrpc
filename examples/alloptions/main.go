@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/nats-io/nats.go"
-	"github.com/nats-rpc/nrpc"
+	"github.com/pkarpovich/nrpc"
 )
 
 //go:generate protoc -I. -I ../../.. --go_out . --nrpc_out . alloptions.proto
