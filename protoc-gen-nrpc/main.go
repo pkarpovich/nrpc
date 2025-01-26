@@ -398,7 +398,7 @@ var funcMap = template.FuncMap{
 		}
 		return goType
 	},
-	"GetTimeout": func(fd *descriptor.FileDescriptorProto) int32 {
+	"GetTimeout": func() int32 {
 		return defaultTimeout
 	},
 }
