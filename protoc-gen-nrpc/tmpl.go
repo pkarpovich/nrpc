@@ -21,7 +21,7 @@ import (
 	{{- if Prometheus}}
 	"github.com/prometheus/client_golang/prometheus"
 	{{- end}}
-	"github.com/pkarpovich/nrpc"
+	"github.com/nats-rpc/nrpc"
 )
 
 {{- range .Service}}
@@ -411,7 +411,7 @@ func (c *{{$serviceName}}Client) {{.GetName}}Subject(
 
 type {{$serviceName}}{{.GetName}}Subscription struct {
 	*nats.Subscription
-	
+
 	encoding string
 }
 
