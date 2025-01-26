@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"path"
+	"strconv"
 	"strings"
 	"text/template"
 
@@ -247,6 +248,7 @@ func getPkgImportName(goPkg string) string {
 
 var pluginPrometheus bool
 var pathsSourceRelative bool
+var defaultTimeout int32 = 5
 
 var funcMap = template.FuncMap{
 	"GoPackageName": func(fd *descriptor.FileDescriptorProto) string {
@@ -396,6 +398,9 @@ var funcMap = template.FuncMap{
 		}
 		return goType
 	},
+	"GetTimeout": func(fd *descriptor.FileDescriptorProto) int32 {
+		return defaultTimeout
+	},
 }
 
 var request plugin.CodeGeneratorRequest
@@ -443,6 +448,10 @@ func main() {
 				pathsSourceRelative = false
 			} else {
 				log.Fatalf(`unknown path type %q: want "import" or "source_relative"`, value)
+			}
+		case "timeout":
+			if t, err := strconv.ParseInt(value, 10, 32); err == nil {
+				defaultTimeout = int32(t)
 			}
 		}
 	}

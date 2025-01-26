@@ -383,7 +383,7 @@ func New{{.GetName}}Client(nc nrpc.NatsConn
 		SvcParam{{.}}: svcParam{{.}},
 		{{- end}}
 		Encoding: "protobuf",
-		Timeout: 300 * time.Second,
+		Timeout: {{.GetTimeout}} * time.Second,
 	}
 }
 {{- $serviceName := .GetName}}
@@ -659,7 +659,7 @@ func NewClient(nc nrpc.NatsConn
 	c := Client{
 		nc: nc,
 		defaultEncoding: "protobuf",
-		defaultTimeout: 300*time.Second,
+		defaultTimeout: {{.GetTimeout}} * time.Second,
 		{{- if ne 0 (len $pkgSubject)}}
 		pkgSubject: "{{$pkgSubject}}",
 		{{- end}}
